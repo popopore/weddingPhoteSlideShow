@@ -55,7 +55,7 @@ def phote_slide():
 
     #Cloudinaryから画像一覧を取得
     #直近15枚の画像を取得
-    img_list = cloudinary.api.resources(type="upload",max_results=15,direction = -1)
+    img_list = cloudinary.api.resources(type="upload",max_results=30,direction = -1)
 
     #ログ　取得したリソース情報を表示
     for image in img_list["resources"]:
