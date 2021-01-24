@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}WeddingPhoteSlide{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='slick/slick.css')}}">
+<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='slick/slick-theme.css')}}">
+<link rel="stylesheet" href="{{url_for('static',filename = 'css/style.css')}}">
+
+<div class="header">
+    <div class="blank top">
+      <!--トップ画像-->
+      <img src="{{url_for('static',filename = '/image/top.jpg')}}" alt="" width="1335" >
+    </div>
+  </div>
+    
+  <!--ここから自動スライド　PROD-->
+  <section class="variable slider">
+
+      <!--スライド用画像取得-->
+      {% for imge in img_list %}
+
+      <div class="slideImage">
+        <img src= {{imge.secure_url}} >
+      </div>
+
+      {% endfor %}
+
+  </section>
+  <!--ここまで自動スライド　PROD-->
+
+
+  <!--ここからJQuery--> 
+
+  <script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
+  <script src="{{url_for('static',filename = 'slick/slick.js')}}" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript">
+
+    window.addEventListener('load', function () {
+      // ページ表示完了した90秒後にリロード
+      setTimeout(doReload, 90000);
+    });
+
+    function doReload() {
+      // reloadメソッドによりページをリロード
+      window.location.reload();
+    }
+
+    $(document).on('ready', function() {
+      $(".variable").slick({
+          slidesToShow: 3, /*1画面に何枚表示するか*/
+          centerMode:true, /*現在のスライドを中央にするかどうか*/
+          centerPadding:'200px', /*slidesToShowが奇数の場合のみ　前後の画像のちら見せ幅*/
+          slidesToScroll: 1,
+          autoplay: true, 
+          autoplaySpeed: 3000, /*画像切り替えスピード
+          arrows:false, /*次画像への矢印出すかどうか*/
+      });
+    });
+</script>
+
+{% endblock %}
